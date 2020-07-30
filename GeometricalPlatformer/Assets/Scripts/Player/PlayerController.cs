@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
-
+    #region Variables
     [SerializeField] private float m_JumpForce = 400f;                          // Amount of force added when the player jumps.
     [Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;          // Amount of maxSpeed applied to crouching movement. 1 = 100%
     [Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
@@ -19,7 +19,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D m_Rigidbody2D;
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
     private Vector3 m_Velocity = Vector3.zero;
+    #endregion
 
+    #region Events
     [Header("Events")]
     [Space]
 
@@ -30,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
     public BoolEvent OnCrouchEvent;
     private bool m_wasCrouching = false;
+    #endregion
 
     private void Awake()
     {
@@ -74,7 +77,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //only control the player if grounded or airControl is turned on
+        // only control the player if grounded or airControl is turned on
         if (m_Grounded || m_AirControl)
         {
 

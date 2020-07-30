@@ -4,25 +4,20 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
+    #region Player Variables
     public PlayerController controller;
 
     public float runSpeed = 40f;
+    #endregion
 
+    #region Movement Variables
     float horizontalMove = 0f;
     bool jump = false;
     bool crouch = false;
+    #endregion
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
         if (Input.GetButtonDown("Jump"))
