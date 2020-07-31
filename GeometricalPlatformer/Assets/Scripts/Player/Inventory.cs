@@ -12,6 +12,7 @@ public class Inventory : MonoBehaviour
 
     #region Power
     public List<Power> powers = new List<Power>();
+    public SelectPower selectPower;
     #endregion
 
     public static Inventory instance;
@@ -37,22 +38,14 @@ public class Inventory : MonoBehaviour
     {
         if (!powers.Contains(power))
         {
+            // First select
+            if (powers.Count == 0)
+            {
+                selectPower.gameObject.GetComponent<Image>().sprite = selectPower.powerToImage[power.powerName];
+            }
+
             // Add power to the list
             powers.Add(power);
-
-            // Able power button
-            string buttonName = power.powerName + "Button";
-            Button button = GameObject.FindGameObjectWithTag(buttonName).GetComponent<Button>();
-
-            if (button != null)
-            {
-                button.interactable = true;
-                var child = button.transform.GetChild(0).gameObject;
-                if (child != null)
-                {
-                    child.SetActive(false);
-                }
-            }
         }
     }
 }
