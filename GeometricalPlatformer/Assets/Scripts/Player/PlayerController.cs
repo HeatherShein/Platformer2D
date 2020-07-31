@@ -19,6 +19,15 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D m_Rigidbody2D;
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
     private Vector3 m_Velocity = Vector3.zero;
+
+    public float hangTime = .15f;
+    public float hangCounter;
+
+    public float jumpBufferLength = .1f;
+    private float jumpBufferCount;
+
+    public Transform camTarget;
+    public float aheadAmount, aheadSpeed;
     #endregion
 
     #region Events
@@ -61,6 +70,26 @@ public class PlayerController : MonoBehaviour
                 if (!wasGrounded)
                     OnLandEvent.Invoke();
             }
+        }
+
+        // Hangtime management
+        if (m_Grounded)
+        {
+            hangCounter = hangTime;
+        }
+        else
+        {
+            hangCounter -= Time.deltaTime;
+        }
+
+        // Jump buffer management
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpBufferCount = jumpBufferLength;
+        }
+        else
+        {
+            jumpBufferCount -= Time.deltaTime;
         }
     }
 
@@ -135,6 +164,18 @@ public class PlayerController : MonoBehaviour
             m_Grounded = false;
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
         }
+
+        /*
+        // Move camera point
+        if (Input.GetAxisRaw("Horizontal") != 0)
+        {
+            camTarget.localPosition = new Vector3(Mathf.Lerp(camTarget.localPosition.x, aheadAmount * Input.GetAxisRaw("Horizontal"), aheadSpeed * Time.deltaTime), camTarget.localPosition.y, camTarget.localPosition.z);
+        }
+        else
+        {
+            camTarget.localPosition = new Vector3(0f, 0f, 0f);
+        }
+        */
     }
 
 
@@ -147,5 +188,20 @@ public class PlayerController : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    public Rigidbody2D GetRigidbody2D()
+    {
+        return m_Rigidbody2D;
+    }
+
+    public float GetJumpBufferCount()
+    {
+        return jumpBufferCount;
+    }
+
+    public void ResetJumpBufferCount()
+    {
+        jumpBufferCount = 0;
     }
 }
