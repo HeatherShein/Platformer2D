@@ -2,7 +2,7 @@
 
 public class Power
 {
-    public string powerName = "Cube";
+    public string powerName = "Default";
 
     public Power(string name)
     {

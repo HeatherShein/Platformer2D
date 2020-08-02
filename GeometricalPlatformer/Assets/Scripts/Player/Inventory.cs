@@ -28,6 +28,11 @@ public class Inventory : MonoBehaviour
         instance = this;
     }
 
+    private void Start()
+    {
+        AddPower(new Power("Default"));
+    }
+
     public void IncreaseScore(int count)
     {
         score += count;
@@ -42,6 +47,7 @@ public class Inventory : MonoBehaviour
             if (powers.Count == 0)
             {
                 selectPower.gameObject.GetComponent<Image>().sprite = selectPower.powerToImage[power.powerName];
+                selectPower.SetCurrentPower(power);
             }
 
             // Add power to the list

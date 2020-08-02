@@ -17,6 +17,7 @@ public class SelectPower : MonoBehaviour
     #endregion
 
     #region PowerImages
+    public Sprite powerDefault;
     public Sprite powerCube;
     public Sprite powerTriangle;
     public Sprite powerSphere;
@@ -27,6 +28,7 @@ public class SelectPower : MonoBehaviour
     public void Awake()
     {
         // Initialize dictionnary with all possible powers
+        powerToImage.Add("Default", powerDefault);
         powerToImage.Add("Cube", powerCube);
         powerToImage.Add("Triangle", powerTriangle);
         powerToImage.Add("Sphere", powerSphere);
@@ -94,5 +96,10 @@ public class SelectPower : MonoBehaviour
     public Power GetCurrentPower()
     {
         return currentPower;
+    }
+
+    public void SetCurrentPower(Power power)
+    {
+        currentPower = power;
     }
 }

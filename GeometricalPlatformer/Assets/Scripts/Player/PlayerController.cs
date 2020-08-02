@@ -164,8 +164,7 @@ public class PlayerController : MonoBehaviour
             m_Grounded = false;
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
         }
-
-        /*
+        
         // Move camera point
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
@@ -175,7 +174,6 @@ public class PlayerController : MonoBehaviour
         {
             camTarget.localPosition = new Vector3(0f, 0f, 0f);
         }
-        */
     }
 
 
